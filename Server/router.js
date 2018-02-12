@@ -8,11 +8,11 @@ const requireAuth = passport.authenticate('jwt', {
   session: false
 });
 
-const requireSignin = passport.authenticate('local' , {session: false});
+const requireSignin = passport.authenticate('local', { session: false });
 
 
-module.exports = function(app) {
-  app.get('/', requireAuth, function(req, res) { //prvo ide na '/' => (salje na) requireAuth zatom radi funkciju
+module.exports = function (app) {
+  app.get('/', requireAuth, function (req, res) { //prvo ide na '/' => (salje na) requireAuth zatom radi funkciju
     res.send({
       message: 'Super secret code is ABC123'
       /*u programu Postman , u podesavnjima se stavi get opcija, zatim se unese korisnik sa novim mailom.

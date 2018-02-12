@@ -9,13 +9,13 @@ const LocalStrategy = require('passport-local');
 const localOptions = {
   usernameField: 'email'
 };
-const localLogin = new LocalStrategy(localOptions, function(email, password, done) {
+const localLogin = new LocalStrategy(localOptions, function (email, password, done) {
   // verify this username and password, call done with user
   //if it is correct email and password
   //otherwise, call done with false
   User.findOne({
     email: email
-  }, function(err, user) { // trazi da li vec ima korisnika sa tom mail adresom
+  }, function (err, user) { // trazi da li vec ima korisnika sa tom mail adresom
 
     if (err) {
       return done(err);
@@ -26,15 +26,15 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
 
     //compare password - is 'password' equal to user.password?
 
-    user.comparePassword(password, function(err, isMatch) {
+    user.comparePassword(password, function (err, isMatch) {
 
-        if(err) {return done(err); } // greska
+      if (err) { return done(err); } // greska
 
-        if(!isMatch) { // ako nije greska, nije nadjen korisnik sa istom adresom
-          return done(null, false);
-        }
+      if (!isMatch) { // ako nije greska, nije nadjen korisnik sa istom adresom
+        return done(null, false);
+      }
 
-        return done( null, user);
+      return done(null, user);
 
     });
 
@@ -50,12 +50,12 @@ const jwtOptions = {
 
 //Create JWT Strategy
 
-const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) { //done callback function
+const jwtLogin = new JwtStrategy(jwtOptions, function (payload, done) { //done callback function
   // See if the user ID in the payload exists in our database
   // If it does, call 'done' with that other
   // otherwise, call done without a user object
 
-  User.findById(payload.sub, function(err, user) {
+  User.findById(payload.sub, function (err, user) {
     if (err) {
       return done(err, false);
     }

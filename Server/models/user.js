@@ -15,18 +15,18 @@ const userSchema = new Schema({
 
 // On save Hook, encrypt password
 //Before saving a model , run this function
-userSchema.pre('save', function(next) {
+userSchema.pre('save', function (next) {
   //get accses to the user model
   const user = this; //accses to user model
 
   //generate a salt, than run callback
-  bcrypt.genSalt(10, function(err, salt) {
+  bcrypt.genSalt(10, function (err, salt) {
     if (err) {
       return next(err);
     }
 
     //hash(encrypt) our password usnig the salt
-    bcrypt.hash(user.password, salt, null, function(err, hash) {
+    bcrypt.hash(user.password, salt, null, function (err, hash) {
       if (err) {
         return next(err);
       }
@@ -39,10 +39,10 @@ userSchema.pre('save', function(next) {
 });
 
 userSchema.methods.comparePassword = function (candidatePassword, callback) {
-  bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+  bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
     //this.password se odnosi na user model password
 
-    if(err) {return callback(err);} // ako ima greske tokom poredjenja vrati error
+    if (err) { return callback(err); } // ako ima greske tokom poredjenja vrati error
 
     callback(null, isMatch);
   });

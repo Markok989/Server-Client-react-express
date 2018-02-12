@@ -1,19 +1,19 @@
 //main starting point of the application
 //node index.js za pokretanje u cmd
 
-const express = require ('express'); // slicno kao import
+const express = require('express'); // slicno kao import
 const http = require('http');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const app = express();
-const router = require ('./router');
-const mongoose = require ('mongoose');
+const router = require('./router');
+const mongoose = require('mongoose');
 const cors = require('cors');
 const user = "salabajzer";
 const pass = "kuckamjakuckastikuckamomi1001987";
 const host = "88.99.81.54";
 const p = "27017";
-const db = "auth" ;
+const db = "auth";
 
 //Db Setup
 //mongoose.connect('mongodb://username:password@host:port/database')
@@ -23,7 +23,7 @@ mongoose.connect(`mongodb://${user}:${pass}@${host}:${p}/${db}`); // kreira novu
 //morgan je login FrimeWork
 app.use(morgan('combined')); //svaki zahtev prolazi kroz morgan, zatim kroz bodyParser po default. Use ih predstavlja kao middlleware
 app.use(cors()); //middlleware
-app.use(bodyParser.json({ type: '*/*'}));//middlleware , analaizirace ih kroz json
+app.use(bodyParser.json({ type: '*/*' }));//middlleware , analaizirace ih kroz json
 app.get('/hello', function (req, res) {
   res.send('Hello World!')
 })
